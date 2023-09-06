@@ -1,9 +1,18 @@
 import { Link } from 'react-router-dom';
 import headerImage from '../../src/assets/images/header-icon.png'
-import UserProfile from '../../src/assets/images/User circle-icon.png'
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { AuthContext } from '../provider/AuthProvider';
+import { toast } from 'react-hot-toast';
+import { FaUser } from 'react-icons/fa';
 
 const Header = () => {
+    const { user, logOut } = useContext(AuthContext)
+    const logoutHandler = () => {
+        logOut()
+            .then(() => {
+                toast.success('Log out!!')
+            })
+    }
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -18,15 +27,15 @@ const Header = () => {
             <div className='bg-[#EBFDFF] px-2 py-[2px] mx-3 my-2 rounded-md border border-black'>
                 <img src={headerImage} alt="" />
             </div>
-            <div className='flex items-center gap-10 mx-4'>
+            <div className='flex items-center gap-2 md:gap-10 md:mx-4'>
                 <div className="relative inline-block">
                     {/* Dropdown toggle button */}
                     <button
-                        className="relative z-10 flex items-center p-2 text-sm text-gray-600 bg-white border border-black rounded-md dark:bg-gray-800 focus:outline-none"
+                        className="relative z-10 flex items-center md:p-2 text-sm text-gray-600 bg-white border border-black rounded-md dark:bg-gray-800 focus:outline-none"
                     >
-                        <span className="mx-1">Select the department: Marketing</span>
+                        <span className="md:mx-1 text-[10px] md:text-[16px]">Select the department: Marketing</span>
                         <svg
-                            className="w-5 h-5 mx-1"
+                            className="md:w-5 w-[16px] md:h-5 mx-1"
                             viewBox="0 0 24 24"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg"
@@ -38,21 +47,27 @@ const Header = () => {
                         </svg>
                     </button>
                 </div>
-                <div className='flex items-center gap-2 text-lg text-white'>
+                <div className='md:flex items-center gap-2 text-lg text-white'>
                     <div className="relative inline-block">
                         {/* Dropdown toggle button */}
                         <div
                             onClick={toggleMenu}
-                            className="relative z-10 flex items-center gap-2"
+                            className="relative z-10 flex flex-col md:flex-row justify-center items-center gap-2 text-center"
                         >
-                            <img className='w-[30px]' src={UserProfile} alt="" />
-                            <span>{'Nithin'}</span>
+                            {
+                                user?.displayName ? <>
+                                    <img className='w-[20px] h-[20px] md:w-[30px] md:h-[30px] rounded-full' src={user?.photoURL} alt="" />
+                                    <span className='text-[10px] md:text-sm'>{user?.displayName}</span>
+                                </> : <>
+                                    <FaUser className='text-xl'></FaUser>
+                                </>
+                          }
                         </div>
 
                         {/* Dropdown menu */}
                         {isOpen && (
                             <div
-                            onClick={closeMenu}
+                                onClick={closeMenu}
                                 className="absolute right-0 z-20 w-56 py-2 mt-2 overflow-hidden origin-top-right bg-white rounded-md shadow-xl dark:bg-gray-800"
                             >
                                 <Link
@@ -61,15 +76,15 @@ const Header = () => {
                                 >
                                     <img
                                         className="flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9"
-                                        src="https://images.unsplash.com/photo-1523779917675-b6ed3a42a561?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8d29tYW4lMjBibHVlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=face&w=500&q=200"
-                                        alt="nithin"
+                                        src={user?.photoURL}
+                                        alt=""
                                     />
                                     <div className="mx-1">
                                         <h1 className="text-sm font-semibold text-gray-700 dark:text-gray-200">
-                                            Nithin
+                                            {user?.displayName ? user?.displayName : ''}
                                         </h1>
                                         <p className="text-sm text-gray-500 dark:text-gray-400">
-                                            mithin@example.com
+                                            {user?.displayName ? user?.email : ''}
                                         </p>
                                     </div>
                                 </Link>
@@ -88,13 +103,6 @@ const Header = () => {
                                     className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
                                 >
                                     Settings
-                                </Link>
-
-                                <Link
-                                    to={'#'}
-                                    className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
-                                >
-                                    Keyboard Shortcuts
                                 </Link>
 
                                 <hr className="border-gray-200 dark:border-gray-700" />
@@ -128,12 +136,24 @@ const Header = () => {
                                 >
                                     Help
                                 </Link>
-                                <Link
-                                    to={'#'}
-                                    className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
-                                >
-                                    Sign Out
-                                </Link>
+                                {
+                                    user?.displayName ? <>
+                                        <Link
+                                            onClick={logoutHandler}
+                                            to={'#'}
+                                            className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+                                        >
+                                            Sign out
+                                        </Link>
+                                    </> : <>
+                                        <Link
+                                            to={'/login'}
+                                            className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+                                        >
+                                            Login
+                                        </Link>
+                                    </>
+                                }
                             </div>
                         )}
                     </div>

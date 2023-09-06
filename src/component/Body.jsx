@@ -7,8 +7,8 @@ const Body = () => {
         <div className="md:space-y-5">
             {/* Body Header */}
             <div className="border rounded border-gray-500 flex flex-col w-full md:w-11/12 p-3">
-                <p className="text-sm font-semibold text-[#171A1F] font-bold">Introduce yourself to AlWorkSquad <span className="text-xl ml-3">i</span></p>
-                <p className="flex items-center text-[8px] mt-2">I am Nithin. SCO of an IT startup company in India <BsPencil className="ml-2 text-lg"></BsPencil></p>
+                <p className="text-lg text-[#171A1F] font-bold">Introduce yourself to AlWorkSquad <span className="text-xl ml-3">i</span></p>
+                <p className="flex items-center text-[12px] text-gray-500 mt-2">I am Nithin. SCO of an IT startup company in India <BsPencil className="ml-2 text-lg"></BsPencil></p>
             </div>
 
             {/* Question ? */}

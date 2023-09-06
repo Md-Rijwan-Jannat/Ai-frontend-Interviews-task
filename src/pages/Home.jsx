@@ -5,6 +5,7 @@ import { BiSolidEdit, BiSolidEditAlt } from 'react-icons/bi';
 import { RiDeleteBin2Line } from 'react-icons/ri';
 import { HiOutlineExternalLink } from 'react-icons/hi';
 import { IoShieldCheckmark } from 'react-icons/io5';
+import { MdKeyboardArrowUp } from 'react-icons/md';
 import { Link } from "react-router-dom";
 import Body from "../component/Body";
 
@@ -20,10 +21,10 @@ const Home = () => {
         setIsOpen(false);
     };
 
-    const [showSecondLink, setShowSecondLink] = useState(false);
+    const [isSecondLinkVisible, setSecondLinkVisible] = useState(false);
 
     const toggleSecondLink = () => {
-        setShowSecondLink(!showSecondLink);
+        setSecondLinkVisible(!isSecondLinkVisible);
     };
     return (
         <div className="flex gap-10 mt-5 p-5">
@@ -32,7 +33,7 @@ const Home = () => {
                     <FaBars />
                 </button>
             </div>
-            <aside className={`hidden md:block min-h-screen px-5 py-8 overflow-y-auto bg-white border rounded dark:bg-gray-900 dark:border-gray-700 shadow-md`}
+            <aside className={`hidden w-[400px] md:block min-h-screen px-5 py-8 overflow-y-auto bg-white border rounded dark:bg-gray-900 dark:border-gray-700 shadow-md`}
             >
                 <div onClick={closeMenu} className="flex justify-end p-3 md:hidden"><BsX></BsX></div>
                 <div className="border border-[#8191C9] rounded text-center w-full py-3">
@@ -48,37 +49,49 @@ const Home = () => {
 
                             <Link className="flex items-center justify-between px-3 py-3 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" to={'#'}>
                                 <div className="flex items-center gap-4">
-                                    <span className="text-sm font-medium mt-1"><BsChatSquare></BsChatSquare></span>
+                                    <span className="text-lg font-medium mt-1"><BsChatSquare></BsChatSquare></span>
                                     <span className="text-sm font-medium">New Chat</span>
                                 </div>
                                 <div className="flex items-center gap-4">
-                                    <span className="text-sm font-medium"> <BiSolidEditAlt></BiSolidEditAlt></span>
-                                    <span className="text-sm font-medium"><RiDeleteBin2Line></RiDeleteBin2Line></span>
+                                    <span className="text-lg font-medium"> <BiSolidEditAlt></BiSolidEditAlt></span>
+                                    <span className="text-lg font-medium"><RiDeleteBin2Line></RiDeleteBin2Line></span>
                                 </div>
                             </Link>
                             <Link className="flex items-center justify-between px-3 py-3 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" to={'#'}>
                                 <div className="flex items-center gap-4">
-                                    <span className="text-sm font-medium mt-1"><BsChatSquare></BsChatSquare></span>
+                                    <span className="text-lg font-medium mt-1"><BsChatSquare></BsChatSquare></span>
                                     <span className="text-sm font-medium">What is marketing</span>
                                 </div>
                                 <div className="flex items-center gap-4">
-                                    <span className="text-sm font-medium"> <BiSolidEditAlt></BiSolidEditAlt></span>
-                                    <span className="text-sm font-medium"><RiDeleteBin2Line></RiDeleteBin2Line></span>
+                                    <span className="text-lg font-medium"> <BiSolidEditAlt></BiSolidEditAlt></span>
+                                    <span className="text-lg font-medium"><RiDeleteBin2Line></RiDeleteBin2Line></span>
                                 </div>
                             </Link>
-                            <Link onClick={toggleSecondLink} className="flex items-center justify-between px-3 py-3 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" to={'#'}>
+                            <Link
+                                className="flex items-center justify-between px-3 py-3 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                                to={'#'}
+                                onClick={toggleSecondLink}
+                            >
                                 <div className="flex items-center gap-4">
-                                    <span className="text-sm font-medium mt-1"><BsChatSquare></BsChatSquare></span>
+                                    <span className="text-lg font-medium mt-1"><BsChatSquare></BsChatSquare></span>
                                     <span className="text-sm font-medium">Gibe me a list of..</span>
                                 </div>
                                 <div className="flex items-center gap-4">
-                                    <span className="text-sm font-medium"> <BiSolidEditAlt></BiSolidEditAlt></span>
-                                    <span className="text-sm font-medium"><RiDeleteBin2Line></RiDeleteBin2Line></span>
+                                    <span className="text-lg font-medium"> <BiSolidEditAlt></BiSolidEditAlt></span>
+                                    <span className="text-lg font-medium"><RiDeleteBin2Line></RiDeleteBin2Line></span>
                                 </div>
                             </Link>
-                            <Link className="flex items-center justify-between px-3 py-3 text-gray-600 transition-colors duration-300 transform rounded-lg border dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700 border-black text-center mt-2" to={'#'}>
-                                <span className="text-sm font-medium">Give me a list of marketing apeticis near me in 5 am</span>
-                            </Link>
+                            {isSecondLinkVisible && (
+                                <div className="relative">
+                                <MdKeyboardArrowUp className="absolute -top-[10px] right-1/2"></MdKeyboardArrowUp>
+                                    <Link
+                                        className="flex items-center justify-between px-3 py-3 text-gray-600 transition-colors duration-300 transform rounded-lg border dark:text-gray-200 border-black text-center mt-2"
+                                        to={'#'}
+                                    >
+                                        <span className="text-sm font-medium">Give me a list of marketing apeticis near me in 5 am</span>
+                                    </Link>
+                                </div>
+                            )}
                             <Link className="flex items-center justify-between px-3 py-3 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700 text-center mt-28" to={'#'}>
                                 <div className="flex items-center gap-4">
                                     <span className="text-sm font-medium"><BsPersonAdd size={19}></BsPersonAdd></span>
@@ -125,37 +138,49 @@ const Home = () => {
 
                             <Link className="flex items-center justify-between px-3 py-3 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" to={'#'}>
                                 <div className="flex items-center gap-4">
-                                    <span className="text-sm font-medium mt-1"><BsChatSquare></BsChatSquare></span>
+                                    <span className="text-lg font-medium mt-1"><BsChatSquare></BsChatSquare></span>
                                     <span className="text-sm font-medium">New Chat</span>
                                 </div>
                                 <div className="flex items-center gap-4">
-                                    <span className="text-sm font-medium"> <BiSolidEditAlt></BiSolidEditAlt></span>
-                                    <span className="text-sm font-medium"><RiDeleteBin2Line></RiDeleteBin2Line></span>
+                                    <span className="text-lg font-medium"> <BiSolidEditAlt></BiSolidEditAlt></span>
+                                    <span className="text-lg font-medium"><RiDeleteBin2Line></RiDeleteBin2Line></span>
                                 </div>
                             </Link>
                             <Link className="flex items-center justify-between px-3 py-3 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" to={'#'}>
                                 <div className="flex items-center gap-4">
-                                    <span className="text-sm font-medium mt-1"><BsChatSquare></BsChatSquare></span>
+                                    <span className="text-lg font-medium mt-1"><BsChatSquare></BsChatSquare></span>
                                     <span className="text-sm font-medium">What is marketing</span>
                                 </div>
                                 <div className="flex items-center gap-4">
-                                    <span className="text-sm font-medium"> <BiSolidEditAlt></BiSolidEditAlt></span>
-                                    <span className="text-sm font-medium"><RiDeleteBin2Line></RiDeleteBin2Line></span>
+                                    <span className="text-lg font-medium"> <BiSolidEditAlt></BiSolidEditAlt></span>
+                                    <span className="text-lg font-medium"><RiDeleteBin2Line></RiDeleteBin2Line></span>
                                 </div>
                             </Link>
-                            <Link className="flex items-center justify-between px-3 py-3 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" to={'#'}>
+                            <Link
+                                className="flex items-center justify-between px-3 py-3 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                                to={'#'}
+                                onClick={toggleSecondLink}
+                            >
                                 <div className="flex items-center gap-4">
-                                    <span className="text-sm font-medium mt-1"><BsChatSquare></BsChatSquare></span>
+                                    <span className="text-lg font-medium mt-1"><BsChatSquare></BsChatSquare></span>
                                     <span className="text-sm font-medium">Gibe me a list of..</span>
                                 </div>
                                 <div className="flex items-center gap-4">
-                                    <span className="text-sm font-medium"> <BiSolidEditAlt></BiSolidEditAlt></span>
-                                    <span className="text-sm font-medium"><RiDeleteBin2Line></RiDeleteBin2Line></span>
+                                    <span className="text-lg font-medium"> <BiSolidEditAlt></BiSolidEditAlt></span>
+                                    <span className="text-lg font-medium"><RiDeleteBin2Line></RiDeleteBin2Line></span>
                                 </div>
                             </Link>
-                            <Link className="flex items-center justify-between px-3 py-3 text-gray-600 transition-colors duration-300 transform rounded-lg border dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700 border-black text-center mt-2" to={'#'}>
-                                <span className="text-sm font-medium">Give me a list of marketing apeticis near me in 5 am</span>
-                            </Link>
+                            {isSecondLinkVisible && (
+                                <div>
+                                    <Link
+                                        className="relative flex items-center justify-between px-3 py-3 text-gray-600 transition-colors duration-300 transform rounded-lg border dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700 border-black text-center mt-2"
+                                        to={'#'}
+                                    >
+                                        <span className="text-sm font-medium">Give me a list of marketing apeticis near me in 5 am</span>
+                                    </Link>
+                                    <MdKeyboardArrowUp className="absolute -top-1 right-1/2"></MdKeyboardArrowUp>
+                                </div>
+                            )}
                             <Link className="flex items-center justify-between px-3 py-3 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700 text-center mt-28" to={'#'}>
                                 <div className="flex items-center gap-4">
                                     <span className="text-sm font-medium"><BsPersonAdd size={19}></BsPersonAdd></span>
