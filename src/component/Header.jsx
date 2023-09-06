@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import headerImage from '../../../public/Images/header-icon.png'
-import UserProfile from '../../../public/Images/User circle-icon.png'
+import headerImage from '../../src/assets/images/header-icon.png'
+import UserProfile from '../../src/assets/images/User circle-icon.png'
 import { useState } from 'react';
 
 const Header = () => {
@@ -14,7 +14,7 @@ const Header = () => {
         setIsOpen(false);
     };
     return (
-        <div className="bg-[#0095A9] flex justify-between items-center rounded">
+        <div className="bg-[#0095A9] flex justify-between items-center rounded py-2">
             <div className='bg-[#EBFDFF] px-2 py-[2px] mx-3 my-2 rounded-md border border-black'>
                 <img src={headerImage} alt="" />
             </div>
